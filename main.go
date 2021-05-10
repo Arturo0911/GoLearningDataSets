@@ -6,15 +6,17 @@ import (
 	"log"
 	"os"
 
+	"github.com/Arturo0911/GoLearningDataSets/util"
 	"github.com/kniren/gota/dataframe"
 )
 
 const (
-	PATH_FILE      = "datasets/COVID.csv"
-	TRAIN_FILE     = "covid_train.csv"
-	TEST_FILE      = "covid_test.csv"
-	PATH_IMAGES    = "images/"
-	IRIS_PATH_FILE = "datasets/iris_headers.csv"
+	PATH_FILE        = "datasets/COVID.csv"
+	TRAIN_FILE       = "iris_train.csv"
+	TEST_FILE        = "iris_test.csv"
+	PATH_IMAGES      = "images/"
+	IRIS_PATH_FILE   = "datasets/iris_headers.csv"
+	GOOGLE_PATH_FILE = "datasets/googleplaystore.csv"
 )
 
 func checkMapSet(cases map[string]int, element string) bool {
@@ -70,7 +72,6 @@ func MakingFilesIris() {
 	defer irisFile.Close()
 
 	irisDF := dataframe.ReadCSV(irisFile)
-	fmt.Println(irisDF)
 
 	trainingNum := (4 * irisDF.Nrow()) / 5
 	testNum := (irisDF.Nrow()) / 5
@@ -99,7 +100,7 @@ func MakingFilesIris() {
 		1: testSubset,
 	}
 
-	for idx, value := range []string{"covid_train.csv", "covid_test.csv"} {
+	for idx, value := range []string{"iris_train.csv", "iris_test.csv"} {
 
 		newFile, err := os.Create(value)
 		if err != nil {
@@ -118,5 +119,6 @@ func MakingFilesIris() {
 
 func main() {
 	//ReadingFile()
-	MakingFilesIris()
+	//MakingFilesIris()
+	util.MakerPlot(GOOGLE_PATH_FILE)
 }
