@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
@@ -88,6 +89,29 @@ func MakingFilesIris() {
 
 	for j := 0; j < testNum; j++ {
 		testSet[j] = trainingNum + j
+	}
+
+	trainSubset := irisDF.Subset(trainSet)
+	testSubset := irisDF.Subset(testSet)
+
+	mapSet := map[int]dataframe.DataFrame{
+		0: trainSubset,
+		1: testSubset,
+	}
+
+	for idx, value := range []string{"covid_train.csv", "covid_test.csv"} {
+
+		newFile, err := os.Create(value)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		w := bufio.NewWriter(newFile)
+
+		if err := mapSet[idx].WriteCSV(w); err != nil {
+			log.Fatal(err)
+		}
+
 	}
 
 }

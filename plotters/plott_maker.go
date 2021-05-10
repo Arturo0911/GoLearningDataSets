@@ -1,5 +1,0 @@
-package plotters
-
-func MakerPlot() {
-
-}
