@@ -30,6 +30,11 @@ func checkMapSet(cases map[string]int, element string) bool {
 	return result
 }
 
+func Processing() {
+
+	fmt.Println("hello go")
+}
+
 func ReadingFile() {
 	file, err := os.Open(PATH_FILE)
 	if err != nil {
